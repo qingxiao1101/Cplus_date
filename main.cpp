@@ -9,9 +9,9 @@ public:
 	static Date default_date;
 	static void set_default(int dd,int mm,int yy);
 	Date(int dd, int mm, int yy);
-	void add_day(int n);
-	void add_month(int n);
-	void add_year(int n);
+	Date& add_day(int n);
+	Date& add_month(int n);
+	Date& add_year(int n);
 	int read_day() const;
 	int read_month() const;
 	int read_year() const;
@@ -31,17 +31,20 @@ void set_default(int dd, int mm, int yy)
 	Date::default_date = Date(dd,mm,yy);
 }
 
-void Date::add_day(int n) 
+Date& Date::add_day(int n) 
 {
 	d = d + n;
+	return *this;
 }
-void Date::add_month(int n)
+Date& Date::add_month(int n)
 {
 	m = m + n;
+	return *this;
 }
-void Date::add_year(int n)
+Date& Date::add_year(int n)
 {
 	y = y + n;
+	return *this;
 }
 int Date::read_day() const
 {
