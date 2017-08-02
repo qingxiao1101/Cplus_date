@@ -4,22 +4,32 @@ using namespace std;
 
 class Date{
 	int d,m,y;
-	const int a;
+	
 public:
-	static int b;
+	static Date default_date;
+	static void set_default(int dd,int mm,int yy);
 	Date(int dd, int mm, int yy);
 	void add_day(int n);
 	void add_month(int n);
 	void add_year(int n);
+	int read_day() const;
+	int read_month() const;
+	int read_year() const;
+	void print_date(void);
 };
+Date Date::default_date(15,06,1994);
+
 Date::Date(int dd, int mm, int yy)
-: a(10)
 {
-	d = dd;
-	m = mm;
-	y = yy;
+	d = dd ? dd : default_date.d;
+	m = mm ? mm : default_date.m;
+	y = yy ? yy : default_date.y;
 }
-int Date::b = 10;
+
+void set_default(int dd, int mm, int yy)
+{
+	Date::default_date = Date(dd,mm,yy);
+}
 
 void Date::add_day(int n) 
 {
@@ -33,9 +43,27 @@ void Date::add_year(int n)
 {
 	y = y + n;
 }
+int Date::read_day() const
+{
+	return d;
+}
+int Date::read_month() const
+{
+	return m;
+}
+int Date::read_year() const
+{
+	return y;
+}
+void Date::print_date(void)
+{
+	cout << Date::d <<"," << Date::m << ","<<Date::y <<endl;
+}
 
 int main()
 {
-	Date test(16,12,2017);
+	Date test(0,0,0);
+	cout << test.read_day() << endl;
+	test.print_date();
 	return 0;
 }
